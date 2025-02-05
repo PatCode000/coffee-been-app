@@ -8,7 +8,7 @@ const routes = [
   { path: '/', component: HomePage },
   {
     path: '/coffee/:id',
-    name: 'coffee', // Add the name here
+    name: 'coffee',
     component: CoffeeDetailPage,
     props: true,
   },

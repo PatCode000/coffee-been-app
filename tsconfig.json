@@ -12,11 +12,14 @@
     }
   ],
   "compilerOptions": {
+    "typeRoots": ["./node_modules/@types", "./node_modules/bootstrap-vue-3/dist", "./src/types"],
     "module": "ESNext",
     "moduleResolution": "Node",
+    "skipLibCheck": true,
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"]
     }
   }
 }
+

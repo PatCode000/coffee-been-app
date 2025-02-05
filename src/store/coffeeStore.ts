@@ -2,7 +2,7 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
 
-interface CoffeeBean {
+export interface CoffeeBean {
   _id: string
   index: number
   isBOTD: boolean
@@ -28,5 +28,9 @@ export const useCoffeeStore = defineStore('coffeeStore', {
         console.error('Error fetching coffee beans:', error);
       }
     },
+    async getCoffeeBeanById(id: string) {
+      // Fetch specific bean details by ID
+      return this.coffeeBeans.find(bean => bean._id === id)
+    }
   },
 });

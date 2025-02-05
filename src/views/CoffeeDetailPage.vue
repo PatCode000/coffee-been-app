@@ -11,6 +11,11 @@
               <li><strong>Cost:</strong> {{ coffee.Cost }}</li>
             </ul>
             <div class="d-flex justify-content-center mt-4">
+              <button @click="addToBasket" class="btn btn-primary btn-lg">
+                <i class="bi bi-cart-plus"></i> Add to Basket
+              </button>
+            </div>
+            <div class="d-flex justify-content-center mt-2">
               <button @click="goBack" class="btn btn-secondary btn-lg">
                 <i class="bi bi-arrow-left-circle"></i> Back
               </button>
@@ -26,10 +31,12 @@
 import { defineComponent, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useCoffeeStore } from '../store/coffeeStore';
+import { useBasketStore } from '../stores/basketStore';
 
 export default defineComponent({
   setup() {
     const store = useCoffeeStore();
+    const basketStore = useBasketStore();
     const route = useRoute();
     const router = useRouter();
 
@@ -37,11 +44,18 @@ export default defineComponent({
       store.coffeeBeans.find(c => c._id === route.params.id)
     );
 
+    const addToBasket = () => {
+      if (coffee.value) {
+        basketStore.addToBasket(coffee.value);
+        alert(`${coffee.value.Name} added to the basket!`);
+      }
+    };
+
     const goBack = () => {
       router.push('/');
     };
 
-    return { coffee, goBack };
+    return { coffee, addToBasket, goBack };
   }
 });
 </script>

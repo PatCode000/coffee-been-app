@@ -1,9 +1,24 @@
 <script setup lang="ts">
-import HomePage from '@/views/HomePage.vue'
-
-// import CoffeeList from './components/CoffeeList.vue';
+import BeansNavbar from '@/components/BeansNavbar.vue'
 </script>
 
 <template>
-  <router-view :key="$route.path"></router-view>
+  <div>
+    <BeansNavbar />
+    <router-view :key="$route.path"></router-view>
+  </div>
 </template>
+
+<style scoped>
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.router-view {
+  margin-top: 60px;
+}
+
+</style>

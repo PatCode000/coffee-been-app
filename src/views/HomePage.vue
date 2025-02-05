@@ -1,7 +1,6 @@
 <template>
   <div class="container mt-4">
     <h1 class="text-center mb-4 custom-title">All The Beans</h1>
-
     <b-row class="g-4">
       <b-col
         v-for="bean in coffeeStore.coffeeBeans"
@@ -36,7 +35,6 @@
 import { onMounted } from 'vue'
 import { useCoffeeStore } from '@/store/coffeeStore'
 import type { CoffeeBean } from '@/store/coffeeStore'
-// import { BRow, BCol, BCard, BCardText, BCardBody, BButton, BImg } from 'bootstrap-vue-3'
 
 const coffeeStore = useCoffeeStore()
 

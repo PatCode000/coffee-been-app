@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '../views/HomePage.vue'
 import CoffeeDetailPage from '../views/CoffeeDetailPage.vue'
-import CheckoutPage from '../views/CheckoutPage.vue'
-import BasketPage from '../views/BasketPage.vue';
+import BasketPage from '../views/BasketPage.vue'
+import OrderForm from '../views/CoffeeOrderForm.vue';
 
 const routes = [
   { path: '/', component: HomePage },
@@ -12,12 +12,8 @@ const routes = [
     component: CoffeeDetailPage,
     props: true,
   },
-  {
-    path: '/checkout',
-    name: 'checkout',
-    component: CheckoutPage,
-  },
   { path: '/basket', component: BasketPage, name: 'basket' },
+  { path: '/order-form', component: OrderForm }
 ]
 
 export const router = createRouter({

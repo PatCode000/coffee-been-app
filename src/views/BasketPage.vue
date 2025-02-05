@@ -43,7 +43,9 @@
         <h3>Total: {{ getTotalBasketPrice() }}</h3>
         <div class="d-flex justify-content-center mt-3">
           <button @click="goBack" class="btn btn-secondary btn-lg me-2">Settle Back</button>
-          <button class="btn btn-success btn-lg">Proceed to Checkout</button>
+          <button @click="proceedToCheckout" class="btn btn-success btn-lg">
+            Proceed to Checkout
+          </button>
         </div>
       </div>
     </div>
@@ -79,6 +81,10 @@ export default defineComponent({
       router.push('/')
     }
 
+    const proceedToCheckout = () => {
+      router.push('/order-form')
+    }
+
     const getItemTotalPrice = (itemId: string) => {
       return '£' + basketStore.getItemTotalPrice(itemId)
     }
@@ -94,6 +100,7 @@ export default defineComponent({
       increaseQuantity,
       decreaseQuantity,
       goBack,
+      proceedToCheckout,
       getItemTotalPrice,
       getTotalBasketPrice,
     }

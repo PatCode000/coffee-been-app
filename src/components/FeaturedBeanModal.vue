@@ -26,10 +26,11 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useBasketStore } from '@/stores/basketStore'
+import type { CoffeeBean } from '@/stores/coffeeStore';
 
 const props = defineProps<{
   visible: boolean
-  coffeeBeans: Array<{ _id: string; Name: string; Image: string; Cost?: string }>
+  coffeeBeans: Array<CoffeeBean>
 }>()
 
 const emit = defineEmits<{

@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import BeansNavbar from '@/components/BeansNavbar.vue'
+import BeansNavbar from './components/BeansNavbar.vue'
 </script>
-
 <template>
   <div>
     <BeansNavbar />
@@ -10,7 +9,6 @@ import BeansNavbar from '@/components/BeansNavbar.vue'
 </template>
 
 <style scoped>
-
 body {
   margin: 0;
   padding: 0;
@@ -19,6 +17,6 @@ body {
 
 .router-view {
   margin-top: 60px;
+  margin-bottom: 60px;
 }
-
 </style>

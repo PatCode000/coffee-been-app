@@ -1,5 +1,5 @@
 import { reactive, watchEffect } from 'vue'
-import type { CoffeeBean } from '@/store/coffeeStore'
+import type { CoffeeBean } from '@/stores/coffeeStore'
 
 interface BasketItem {
   id: string

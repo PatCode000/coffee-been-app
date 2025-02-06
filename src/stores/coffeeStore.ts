@@ -1,4 +1,3 @@
-// store/coffeeStore.ts
 import { defineStore } from 'pinia';
 import axios from 'axios';
 
@@ -29,7 +28,6 @@ export const useCoffeeStore = defineStore('coffeeStore', {
       }
     },
     async getCoffeeBeanById(id: string) {
-      // Fetch specific bean details by ID
       return this.coffeeBeans.find(bean => bean._id === id)
     }
   },

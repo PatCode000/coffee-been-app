@@ -1,5 +1,9 @@
 <template>
   <div v-if="coffee" class="container mt-5">
+        <NotificationHandler
+      v-model:visible="notificationVisible"
+      :coffeeBeans="coffeeStore.coffeeBeans"
+    />
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="card shadow-lg">
@@ -28,36 +32,41 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
-import { useCoffeeStore } from '../store/coffeeStore';
+import { defineComponent, computed, ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { useCoffeeStore } from '../stores/coffeeStore'
 import { useBasketStore } from '../stores/basketStore';
+import NotificationHandler from '@/components/NotificationHandler.vue'
 
 export default defineComponent({
+  name: 'CoffeeDetail',
+  components: {
+    NotificationHandler,
+  },
   setup() {
-    const store = useCoffeeStore();
+    const coffeeStore = useCoffeeStore()
     const basketStore = useBasketStore();
-    const route = useRoute();
-    const router = useRouter();
+    const route = useRoute()
+    const router = useRouter()
 
-    const coffee = computed(() =>
-      store.coffeeBeans.find(c => c._id === route.params.id)
-    );
+    const notificationVisible = ref(false)
+
+    const coffee = computed(() => coffeeStore.coffeeBeans.find((c) => c._id === route.params.id))
 
     const addToBasket = () => {
       if (coffee.value) {
-        basketStore.addToBasket(coffee.value);
-        alert(`${coffee.value.Name} added to the basket!`);
+        basketStore.addToBasket(coffee.value)
+        notificationVisible.value = true
       }
-    };
+    }
 
     const goBack = () => {
-      router.push('/');
-    };
+      router.push('/')
+    }
 
-    return { coffee, addToBasket, goBack };
-  }
-});
+    return { coffeeStore, coffee, addToBasket, goBack, notificationVisible }
+  },
+})
 </script>
 
 <style scoped>

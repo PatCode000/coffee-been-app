@@ -1,11 +1,9 @@
 <template>
   <div class="container mt-4">
+    <FeaturedBeanModal v-model:visible="showFeaturedModal" :coffeeBeans="coffeeStore.coffeeBeans" />
     <h1 class="text-center mb-4 custom-title">All The Beans</h1>
     <div class="mb-4">
-      <b-form-input
-        v-model="searchTerm"
-        placeholder="Search coffee beans..."
-      />
+      <b-form-input v-model="searchTerm" placeholder="Search coffee beans..." />
     </div>
     <div class="mb-4">
       <b-form-select v-model="filterCountry" class="w-100" :options="countryOptions">
@@ -43,9 +41,10 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
-import { useCoffeeStore } from '@/store/coffeeStore'
-import type { CoffeeBean } from '@/store/coffeeStore'
+import { useCoffeeStore } from '@/stores/coffeeStore'
+import type { CoffeeBean } from '@/stores/coffeeStore'
 import { useRouter } from 'vue-router'
+import FeaturedBeanModal from '@/components/FeaturedBeanModal.vue'
 
 const coffeeStore = useCoffeeStore()
 const router = useRouter()
@@ -53,6 +52,8 @@ const router = useRouter()
 onMounted(async () => {
   await coffeeStore.fetchCoffeeBeans()
 })
+
+const showFeaturedModal = ref(true)
 
 const searchTerm = ref('')
 const filterCountry = ref('')
@@ -62,7 +63,7 @@ const countryOptions = computed(() => {
   coffeeStore.coffeeBeans.forEach((bean: CoffeeBean) => {
     if (bean.Country) countries.add(bean.Country)
   })
-  return Array.from(countries).map(country => ({ value: country, text: country }))
+  return Array.from(countries).map((country) => ({ value: country, text: country }))
 })
 
 const filteredBeans = computed(() => {
@@ -70,10 +71,11 @@ const filteredBeans = computed(() => {
 
   if (searchTerm.value) {
     const term = searchTerm.value.toLowerCase()
-    beans = beans.filter((bean: CoffeeBean) =>
-      bean.Name.toLowerCase().includes(term) ||
-      bean.Country.toLowerCase().includes(term) ||
-      bean.Cost.toLowerCase().includes(term)
+    beans = beans.filter(
+      (bean: CoffeeBean) =>
+        bean.Name.toLowerCase().includes(term) ||
+        bean.Country.toLowerCase().includes(term) ||
+        bean.Cost.toLowerCase().includes(term),
     )
   }
 
